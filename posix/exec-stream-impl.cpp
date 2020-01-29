@@ -240,14 +240,16 @@ void exec_stream_t::impl_t::start( std::string const & program )
         }catch( std::exception const & e ) {
             const char * msg=e.what();
             std::size_t len=strlen( msg );
-            write( status_pipe.w(), &len, sizeof( len ) );
-            write( status_pipe.w(), msg, len );
+            std::size_t ret_val = write( status_pipe.w(), &len, sizeof( len ) );
+            ret_val = write( status_pipe.w(), msg, len );
+            if(ret_val){}
             _exit( -1 );
         }catch( ... ) {
-            char * msg="exec_stream_t::start: unknown exception in child process";
-            std::size_t len=strlen( msg );
-            write( status_pipe.w(), &len, sizeof( len ) );
-            write( status_pipe.w(), msg, len );
+            std::string msg="exec_stream_t::start: unknown exception in child process";
+            std::size_t len=strlen( msg.c_str() );
+            std::size_t ret_val = write( status_pipe.w(), &len, sizeof( len ) );
+            ret_val = write( status_pipe.w(), msg.c_str(), len );
+            if(ret_val){}
             _exit( 1 );
         }
     }else {

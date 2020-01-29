@@ -1,6 +1,9 @@
-This is version 0.3 of libexecstream, a C++ library 
-that allows you to run a child process and have its input, 
-output and error avaliable as standard C++ streams.
+This is version 0.4 of libexecstream++, an updated version
+of libexecstream with the warnings fixed from minor modifications
+made in January 2020 by Nicholas Ham.
+
+libexecstream is a C++ library  that allows you to run a child process
+and have its input, output and error avaliable as standard C++ streams.
 
 Copyright (c) 2004 Artem Khodush
 Libexecstream is distributed under the BSD-style license,

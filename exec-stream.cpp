@@ -35,7 +35,9 @@ EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #ifdef _WIN32
 
+#ifndef NOMINMAX
 #define NOMINMAX
+#endif
 #include <windows.h>
 
 #define HELPERS_H         "win/exec-stream-helpers.h"
@@ -61,8 +63,6 @@ EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #endif
 
 // helper classes
-namespace {
-
 class buffer_list_t {
 public:
     struct buffer_t {
@@ -208,20 +208,13 @@ void buffer_list_t::clear()
     m_total_size=0;
 }
 
-}
 
 // platform-dependent helpers
-
-namespace {
-
 #include HELPERS_H
 #include HELPERS_CPP
 
-}
 
 // stream buffer class
-namespace {
-
 class exec_stream_buffer_t : public std::streambuf {
 public:
     exec_stream_buffer_t( exec_stream_t::stream_kind_t kind, thread_buffer_t & thread_buffer );
@@ -347,8 +340,6 @@ public:
     }
 };
 
-}
-
 // platform-dependent implementation
 #include IMPL_CPP
 
@@ -411,8 +402,6 @@ void exec_stream_t::exceptions( bool enable )
 }
 
 // exec_stream_t::error_t
-namespace {
-    
 std::string int2str( unsigned long i, int base, std::size_t width ) 
 {
     std::string s;
@@ -427,8 +416,6 @@ std::string int2str( unsigned long i, int base, std::size_t width )
         }
     }
     return s;
-}
-
 }
 
 exec_stream_t::error_t::error_t()
